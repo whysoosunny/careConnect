@@ -46,7 +46,7 @@ export function CareBot() {
             <p className="flex items-center gap-2 font-semibold">
               CareBot
               <span className="inline-flex items-center gap-1 text-xs font-normal opacity-90">
-                <span className="h-2 w-2 rounded-full bg-emerald-300" /> Online
+                <span className="h-2 w-2 rounded-full bg-emerald-300" /> AI assistant
               </span>
             </p>
             <p className="text-[11px] opacity-80">Informational assistant - not medical advice</p>
@@ -56,9 +56,9 @@ export function CareBot() {
             {messages.length === 0 && (
               <div className="space-y-3">
                 <div className="max-w-[90%] rounded-2xl rounded-bl-sm bg-black/5 px-3.5 py-2 text-sm text-foreground dark:bg-white/10">
-                  Hello! I&apos;m CareBot, the Jarurat Care Foundation assistant. I can help you
-                  learn about our services, volunteering, donations, medical report review, and
-                  how to get in touch. I can&apos;t provide medical advice, but I&apos;ll do my
+                  Hello! I&apos;m CareBot, the CareConnect assistant. I can help you
+                  understand the support request form, volunteer registration, and
+                  contact options. I can&apos;t provide medical advice, but I&apos;ll do my
                   best to guide you to the right resources.
                 </div>
                 <QuickActions onPick={send} disabled={isLoading} />
@@ -84,3 +84,4 @@ export function CareBot() {
     </>
   );
 }
+

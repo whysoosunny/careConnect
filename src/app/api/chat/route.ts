@@ -3,9 +3,8 @@ import { detectMedicalIntent, MEDICAL_SAFE_REPLY } from "@/server/medicalGuard";
 import type { ChatResponse } from "@/lib/types";
 
 const FALLBACK =
-  "I don't have enough information to answer that accurately. If you'd like immediate " +
-  "assistance, you can contact Jarurat Care Foundation directly:\n\n" +
-  "- **Email:** Priyanka.joshi@jarurat.care\n- **Phone / WhatsApp:** +91 99402 63931";
+  "I'm unable to answer that right now. Please try again shortly, or use the " +
+  "Contact form on the home page for a general inquiry.";
 
 const WINDOW_MS = 60_000;
 const MAX_REQ = 15;
@@ -78,3 +77,4 @@ export async function POST(request: Request) {
 function reply(payload: ChatResponse, status = 200) {
   return Response.json(payload, { status });
 }
+

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ChatMessage, ChatResponse } from "@/lib/types";
 
-const STORAGE_KEY = "careconnect.chat.v1";
+const STORAGE_KEY = "careconnect.chat.v2";
 const MAX_STORED = 20;
 
 function uid(): string {
@@ -26,8 +26,8 @@ function saveHistory(messages: ChatMessage[]): void {
 }
 
 const NETWORK_FALLBACK =
-  "I couldn't reach the server just now. Please contact Jarurat Care Foundation at " +
-  "Priyanka.joshi@jarurat.care or +91 99402 63931.";
+  "I couldn't reach the server just now. Please check your connection and try again. " +
+  "You can also use the Contact form on the home page.";
 
 export function useChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -91,3 +91,4 @@ export function useChat() {
 
   return { messages, isLoading, send, clear };
 }
+

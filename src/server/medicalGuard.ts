@@ -11,7 +11,6 @@ export function detectMedicalIntent(text: string): boolean {
 }
 
 export const MEDICAL_SAFE_REPLY =
-  "I'm not able to give medical advice. For anything about symptoms, medicines, doses, " +
-  "or treatment decisions, please consult your oncologist or medical team. You can also " +
-  "reach the Jarurat Care Foundation team, who can guide you to the right support:\n\n" +
-  "- **Email:** Priyanka.joshi@jarurat.care\n- **Phone / WhatsApp:** +91 99402 63931";
+  "I'm not able to give medical advice. For questions about symptoms, medicines, doses, " +
+  "or treatment decisions, please consult a qualified healthcare professional or your " +
+  "medical team. In an emergency, contact your local emergency services immediately.";

@@ -1,8 +1,8 @@
 const SUGGESTIONS = [
-  "What support services are available?",
+  "How do I submit a support request?",
   "How can I volunteer?",
-  "How do I donate?",
-  "Medical Report Review",
+  "What can CareBot help with?",
+  "What happens after I submit a form?",
   "How do I contact you?",
 ];
 
@@ -29,3 +29,4 @@ export function QuickActions({
     </div>
   );
 }
+

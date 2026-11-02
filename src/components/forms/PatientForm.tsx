@@ -53,17 +53,13 @@ export function PatientForm() {
         onReset={() => setDone(null)}
       >
         <p>
-          Thank you, {done.name.split(" ")[0]}. A member of the Jarurat Care Foundation team
-          will review your request and contact you within <strong>24-48 hours</strong> via
-          your preferred method.
+          Thank you, {done.name.split(" ")[0]}. Your support request has been saved.
+          Please keep your reference ID for your records. Submitting a request does
+          not confirm an appointment or guarantee support.
         </p>
         <p className="mt-2 text-foreground/60">
           If this is a medical emergency, please contact your local emergency services
-          immediately. Questions? Email{" "}
-          <a className="text-teal-600 underline dark:text-teal-400" href="mailto:Priyanka.joshi@jarurat.care">
-            Priyanka.joshi@jarurat.care
-          </a>
-          .
+          immediately.
         </p>
       </SuccessBanner>
     );
@@ -160,3 +156,4 @@ export function PatientForm() {
     </form>
   );
 }
+
