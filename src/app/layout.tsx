@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CareConnect - Jarurat Care Foundation Support Portal",
+  title: "CareConnect | Healthcare Support Portal",
   description:
-    "Patient support, volunteer registration, and an AI FAQ assistant (CareBot) for Jarurat Care Foundation - a Mumbai NGO supporting cancer patients.",
+    "A healthcare support portal with patient request forms, volunteer registration, a submissions dashboard, and CareBot, an AI-powered informational assistant.",
 };
 
 export default function RootLayout({
@@ -44,3 +44,4 @@ export default function RootLayout({
     </html>
   );
 }
+

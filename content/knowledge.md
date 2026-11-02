@@ -1,44 +1,27 @@
-# Jarurat Care Foundation - Knowledge Base for CareBot
-
-This is the single source of truth CareBot may use to answer questions. If a question
-is not covered here, CareBot must say it is not certain and direct the person to the
-contact details below - it must never invent services or details.
+# CareConnect — CareBot Knowledge Base
 
 ## About
-- Jarurat Care Foundation is a community-driven NGO based in Mumbai, India, founded in December 2023.
-- It was started after the founder lost their mother to cholangiocarcinoma (a bile-duct cancer).
-- Tagline: "Jaisi Jarurat Vaisi Care" (care shaped to each person's need).
-- Focus: supporting cancer patients and their caregivers - with particular experience in
-  gastrointestinal (GI) and biliary-tract cancers - so that no one faces the journey alone.
-- Mission: bring hope, care, guidance, and community to patients, caregivers, and healthcare
-  professionals across India.
+CareConnect is a healthcare support portal demonstration for patient support requests, volunteer registration, and general inquiries. It is not a hospital, charity, emergency service, or medical provider.
 
-## What we help with (services)
-- **Treatment Guidance**: helping patients understand their options and connect with experienced oncologists.
-- **Medical Report Review**: facilitating a free review of medical reports by specialists so patients get clarity and, where helpful, a second opinion. (CareBot cannot interpret reports itself - it explains how to request this service.)
-- **Financial Assistance**: helping patients and families access financial support for treatment and essential needs.
-- **Nutrition Counseling**: personalized nutritional guidance during and after treatment.
-- **Emotional & Peer Support**: emotional care for patients and caregivers.
-- **Healing Hearts Community**: a peer-support community ("Cancer Care Community") where patients and caregivers share guidance, comfort, and lived experience.
-- **Awareness & Education**: spreading awareness about cancer and cancer care.
+## Patient support requests
+Choose the Patient Support tab on the home page. Enter sample contact details, city, who needs support, a support category, a description, and a preferred contact method.
+Categories include Treatment Guidance, Medical Report Review, Financial Assistance, Nutrition Counseling, Emotional & Peer Support, Community Support, and Other. These are request categories, not a promise that services are available.
+Successful submissions receive a reference ID. Saving a request does not confirm an appointment, guarantee assistance, or trigger a notification. No response time is guaranteed.
 
-## How to get involved
-- **Volunteer**: register via the Volunteer / "Join Us" page (`/join-us` on jarurat.care) or the Volunteer Registration form on this site. The team reviews applications and reaches out when there is a suitable opportunity.
-- **Donate**: contribute via the Donate page (`/donate` on jarurat.care). Donations fund treatments and essential support services.
-- **Join the community**: patients and caregivers can join the Healing Hearts community (a WhatsApp group is available via the website).
+## Volunteering
+Choose the Volunteer tab. Enter sample contact details, profession (optional), skills, availability, and a reason for volunteering. A successful submission receives a reference ID. Registration does not guarantee placement or follow-up.
 
-## Response times
-- The team typically responds to support requests and messages within **24-48 hours**.
+## General inquiries
+Choose the Contact tab and complete the name, email, subject, and message fields. Successful submissions are saved with a reference ID.
+No public support email, telephone number, external community group, or donation link is configured. Never invent one.
 
-## Contact
-- Email: **Priyanka.joshi@jarurat.care**
-- Phone / WhatsApp: **+91 99402 63931**
-- Website: **jarurat.care**
+## Dashboard
+The public /dashboard page shows counts, charts, and recent database submissions. Use sample data only. Do not enter real patient, medical, or personal information.
 
-## Important boundaries
-- CareBot is an **informational assistant**, not a medical professional.
-- CareBot must **not** provide medical advice - no diagnoses, no medicine or dosage
-  recommendations, no treatment decisions, no interpretation of symptoms or test results.
-- For anything clinical, direct the person to their oncologist / medical team, or to the
-  Jarurat Care team via the contact details above.
-- In an emergency, advise contacting local emergency services immediately.
+## Scope
+There is no report upload, clinical review, appointment booking, payment, donation processing, or email/SMS/WhatsApp notification feature.
+Chat history is stored in the visitor's browser. CareBot requires a configured AI connection and may be unavailable.
+Answer only using this knowledge base. For missing information, say that it is unavailable and suggest the Contact form for general inquiries. Never claim an operational support team, partnerships, guaranteed response times, or verified services.
+
+## Boundaries
+CareBot provides portal information, not medical advice. Do not diagnose, recommend medicines or dosages, decide treatment, or interpret symptoms or medical reports. Refer clinical questions to a qualified healthcare professional or the person's medical team. For emergencies, advise contacting local emergency services immediately.

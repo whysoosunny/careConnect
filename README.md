@@ -1,22 +1,17 @@
-# CareConnect - Jarurat Care Foundation Support Portal
+# CareConnect
 
-A concept-level healthcare support web app for [Jarurat Care Foundation](https://www.jarurat.care), a Mumbai NGO supporting cancer patients and their caregivers. It provides patient support, volunteer and contact forms with instant auto-responses, and CareBot - an AI FAQ assistant powered by Google Gemini, grounded in the NGO's real information and guarded against giving medical advice.
+**Healthcare support requests, volunteer registration, and an AI-powered information assistant in one portal.**
 
-Built as an assignment prototype, so it favours a clean, realistic architecture over feature count.
+CareConnect is a full-stack web application built with Next.js and TypeScript. It provides validated forms for patient support, volunteering, and general inquiries, stores submissions in Supabase, and uses Google Gemini to power CareBot.
 
-### [Watch the demo video](https://youtu.be/iYNgzbxONQ0)
+Maintained by [Sunny Kumar](https://github.com/whysoosunny).
 
-**Live Website:** [careconnect-jc.vercel.app](https://careconnect-jc.vercel.app)
-
-some features may be down due to inactivity.
-
-**Submissions dashboard:** the same site at **`/dashboard`** (public, demo data) - stat tiles, charts, and the recent submissions captured by the forms.
-Note: The backend uses the Supabase free tier, which pauses after inactivity. If forms or dashboards fail to load, the database is currently asleep. Feel free to reach out if you'd like me to wake it up for a demo!
+> Demonstration project: the dashboard is public, so use sample data only. CareConnect does not provide medical care or guarantee access to support services.
 
 ## Features
 
-- **Patient Support form** - name, email, phone, city, patient type, support needed (tuned to Jarurat's services), description with a live character counter, and preferred contact method. Client and server validation, an emergency banner, and an auto-response with a reference ID (e.g. `CB-1042`).
-- **CareBot, the AI FAQ assistant** - a floating chat widget on every page. Answers questions about services, volunteering, donations, medical report review, and contact. Powered by Gemini Flash, grounded on a knowledge base, and clearly labelled informational, not medical advice.
+- **Patient Support form** - name, email, phone, city, patient type, support needed, description with a live character counter, and preferred contact method. Client and server validation, an emergency banner, and an auto-response with a reference ID (e.g. `CB-1042`).
+- **CareBot, the AI FAQ assistant** - a floating chat widget on every page. Answers questions about portal features, support requests, volunteering, and contact options. Powered by Gemini Flash, grounded on a knowledge base, and clearly labelled informational, not medical advice.
 - **Volunteer and Contact forms** - same validated pattern and API.
 - **Submissions dashboard** (`/dashboard`) - stat tiles, bar charts of requests by type and support category, and a recent-submissions table. Unauthenticated (demo only, see limitations).
 
@@ -34,39 +29,24 @@ Note: The backend uses the Supabase free tier, which pauses after inactivity. If
 
 ## Architecture
 
-Everything sensitive runs server-side in Next.js Route Handlers, so the browser never sees the Gemini or Supabase keys.
+1. Forms send validated input to POST /api/submit.
+2. The route checks a honeypot field, validates again with Zod, and stores the submission in Supabase.
+3. POST /api/chat applies an in-memory rate limit and a medical-intent guard before calling Gemini.
+4. CareBot uses content/knowledge.md as its factual context.
+5. The server-rendered /dashboard displays counts, charts, and recent submissions from the latest 200 records.
 
-```
- Browser (client components)
- ┌───────────────────────────────────────────┐
- │  Patient / Volunteer / Contact forms       │
- │  CareBot chat widget                       │
- └───────────────┬───────────────┬───────────┘
-                 │               │
-        POST /api/submit   POST /api/chat
-                 │               │
- Next.js Route Handlers (server-only)
- ┌───────────────▼───┐   ┌───────▼─────────────────────────┐
- │ honeypot check    │   │ IP rate-limit                   │
- │ zod re-validation │   │ medical-safety guard            │
- │ Supabase INSERT   │   │ Gemini (grounded on knowledge)  │
- └───────────────┬───┘   └───────┬─────────────────────────┘
-                 │               │
-            Supabase DB      Gemini Flash
-```
+Credentials stay on the server. Server-side key handling does not replace authentication or database access policies.
 
-## The AI idea and NGO use-case
-
-Jarurat Care already runs an AI assistant ("HOPE"), so an FAQ chatbot fits naturally. CareBot lets a patient or caregiver get instant, reliable answers without waiting for staff, which cuts the NGO's repetitive-question load while keeping people safe:
-
-- **Grounded:** answers only from `content/knowledge.md` (real services, contact, response times). The system prompt tells it to never claim a service that isn't in the knowledge base and to defer to the team when unsure.
-- **Safe:** a code-level medical-intent guard (`src/server/medicalGuard.ts`) short-circuits advice-seeking and clinical questions ("which chemo should I take?", symptoms, doses) with a safe referral before ever calling the model. It deliberately does not trip on admin phrases like "medical report review".
-- The Patient Support form and auto-response are the automation piece: submissions are captured centrally with a reference ID and an expected 24-48h response.
+Support categories describe requests users can submit, not verified services. Confirmations appear in the browser; the app does not send email, SMS, or WhatsApp notifications or promise a response time.
 
 ## Run locally
 
+Requires Node.js 20.9 or later and npm.
+
 ```bash
-npm install
+git clone https://github.com/whysoosunny/careConnect.git
+cd careConnect
+npm ci
 cp .env.example .env.local   # then fill in the three values
 npm run dev                  # http://localhost:3000
 ```
@@ -81,7 +61,7 @@ SUPABASE_ANON_KEY=  # Supabase, Project Settings > API (anon/public key)
 
 ### Supabase setup (SQL)
 
-Create a project, then run this in the SQL editor:
+Create a demo project, then run this in the SQL editor. These policies allow anonymous reads and inserts: use synthetic data only. Protect the dashboard and restrict database policies before collecting real information:
 
 ```sql
 create table if not exists submissions (
@@ -110,6 +90,10 @@ create policy "anon can read" on submissions
   for select to anon using (true);
 ```
 
+## Validation
+
+Run `npm run lint`, `npx tsc --noEmit`, and `npm run build` before deployment. Use `npm start` to serve a production build.
+
 ## Deploy to Vercel
 
 1. Push this repo to GitHub.
@@ -117,30 +101,20 @@ create policy "anon can read" on submissions
 3. Add the three environment variables (same as `.env.local`).
 4. Deploy. You get a live URL. Test that `/api/chat` responds and a form submission lands in Supabase.
 
-## Screenshots
+## Current limitations
 
-| Home + Patient Support form | CareBot (grounded AI answer) |
-|---|---|
-| ![Home](screenshots/home-light.png) | ![CareBot](screenshots/carebot-answer-light.png) |
+- The dashboard and demo database policies are unauthenticated. Use sample data only.
+- Rate limiting runs in memory per server instance.
+- CareBot is informational; the pattern-based medical-intent guard cannot catch every clinical question.
+- No appointments, document uploads, payments, donations, or outbound notifications are implemented.
+- Reference IDs are random four-digit values and can collide.
 
-![Submissions dashboard](screenshots/dashboard-light.png)
+## Planned improvements
 
-More screenshots of every view - the volunteer and contact forms, the auto-response, the CareBot medical-safety guard, and all screens in both light and dark themes - are in the [`screenshots/`](screenshots) folder.
+- Authenticated staff access and restrictive database policies.
+- Submission status tracking and durable reference IDs.
+- Shared rate limiting and automated workflow tests.
 
-## Prototype limitations
+## Project feedback
 
-- No authentication, including the `/dashboard`, which is public for this demo (uses fake data). In production it would be auth-gated and would show aggregates rather than raw contact details.
-- A single `submissions` table (fine for a concept).
-- CareBot is informational only, not medical advice.
-- Rate limiting is demo-only (in-memory, per serverless instance).
-- The PDF upload and staff dashboard from early ideas were cut to keep scope tight.
-
-## Future improvements
-
-- Auth-gated staff dashboard to triage submissions.
-- Durable rate limiting (Upstash / Vercel KV) and service-role/Edge-Function inserts.
-- Appointment booking, PDF medical-report summarization, and RAG over the NGO's real content.
-
----
-
-_Not affiliated with or endorsed by Jarurat Care Foundation; built as an educational prototype using their public information._
+Report bugs and suggest features through [GitHub Issues](https://github.com/whysoosunny/careConnect/issues). Do not include private patient information.

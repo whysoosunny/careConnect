@@ -44,7 +44,7 @@ export const SUPPORT_OPTIONS = [
   "Financial Assistance",
   "Nutrition Counseling",
   "Emotional & Peer Support",
-  "Healing Hearts Community",
+  "Community Support",
   "Other",
 ] as const;
 
@@ -105,3 +105,4 @@ export const schemaByKind = {
 } as const;
 
 export type SubmissionKind = keyof typeof schemaByKind;
+

@@ -41,9 +41,8 @@ export function VolunteerForm() {
     return (
       <SuccessBanner title="Application received" refId={done.refId} onReset={() => setDone(null)}>
         <p>
-          Thank you for registering as a volunteer with Jarurat Care Foundation, {done.name.split(" ")[0]}.
-          Your application has been received and our team will contact you if there&apos;s a
-          suitable opportunity.
+          Thank you for registering as a volunteer with CareConnect, {done.name.split(" ")[0]}.
+          Your application has been saved. Please keep your reference ID for your records.
         </p>
       </SuccessBanner>
     );
@@ -100,7 +99,7 @@ export function VolunteerForm() {
           rows={4}
           maxLength={MAX_REASON}
           className={inputClassName}
-          placeholder="A sentence or two about what draws you to Jarurat Care."
+          placeholder="A sentence or two about what draws you to CareConnect."
           {...register("reason")}
         />
       </Field>
@@ -123,3 +122,4 @@ export function VolunteerForm() {
     </form>
   );
 }
+

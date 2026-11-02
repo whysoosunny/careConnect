@@ -41,8 +41,8 @@ export function ContactForm() {
     return (
       <SuccessBanner title="Message sent" refId={done.refId} onReset={() => setDone(null)}>
         <p>
-          Thank you for contacting Jarurat Care Foundation. We&apos;ve received your message and
-          will get back to you within <strong>24-48 hours</strong>.
+          Thank you for contacting CareConnect. Your message has been saved.
+          Please keep your reference ID for your records.
         </p>
       </SuccessBanner>
     );
@@ -98,3 +98,4 @@ export function ContactForm() {
     </form>
   );
 }
+
