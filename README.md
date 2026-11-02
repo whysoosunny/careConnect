@@ -1,5 +1,11 @@
 # CareConnect
 
+[![Live demo](https://img.shields.io/badge/Live_Demo-Visit_CareConnect-0d9488?style=for-the-badge)](https://careconnect-jc.vercel.app/)
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ecf8e?logo=supabase&logoColor=white)
+![Gemini](https://img.shields.io/badge/Google_Gemini-886fbf)
+
 **Healthcare support requests, volunteer registration, and an AI-powered information assistant in one portal.**
 
 CareConnect is a full-stack web application built with Next.js and TypeScript. It provides validated forms for patient support, volunteering, and general inquiries, stores submissions in Supabase, and uses Google Gemini to power CareBot.
@@ -7,6 +13,25 @@ CareConnect is a full-stack web application built with Next.js and TypeScript. I
 Maintained by [Sunny Kumar](https://github.com/whysoosunny).
 
 > Demonstration project: the dashboard is public, so use sample data only. CareConnect does not provide medical care or guarantee access to support services.
+
+**[Open live demo](https://careconnect-jc.vercel.app/)** · [Screenshots](#screenshots) · [Features](#features) · [Setup](#run-locally) · [Architecture](#architecture)
+
+## Live demo
+
+Explore the application at **[careconnect-jc.vercel.app](https://careconnect-jc.vercel.app/)**.
+
+The deployment currently shows an earlier branding version. The source on `main` contains the updated CareConnect branding; redeploy that branch to bring the live site into sync.
+
+## Screenshots
+
+Interface captures from the live application. Images are cropped to the form panels and contain no submitted user data.
+
+### Patient support
+![Patient support request form](screenshots/patient.jpg)
+
+| Contact form — light theme | Contact form — dark theme |
+| --- | --- |
+| ![Contact form in light mode](screenshots/contact.jpg) | ![Contact form in dark mode](screenshots/contact-dark.jpg) |
 
 ## Features
 
@@ -39,6 +64,18 @@ Credentials stay on the server. Server-side key handling does not replace authen
 
 Support categories describe requests users can submit, not verified services. Confirmations appear in the browser; the app does not send email, SMS, or WhatsApp notifications or promise a response time.
 
+## Project structure
+
+| Directory | Purpose |
+| --- | --- |
+| `src/app` | Pages, application layout, and API routes |
+| `src/components` | Forms, chat widget, dashboard charts, and shared UI |
+| `src/hooks` | Chat state and browser history management |
+| `src/lib` | Shared schemas, types, and submission helpers |
+| `src/server` | Gemini integration, Supabase client, and medical-intent checks |
+| `content` | CareBot knowledge base |
+| `screenshots` | Interface screenshots used in this README |
+
 ## Run locally
 
 Requires Node.js 20.9 or later and npm.
@@ -50,6 +87,8 @@ npm ci
 cp .env.example .env.local   # then fill in the three values
 npm run dev                  # http://localhost:3000
 ```
+
+On Windows Command Prompt, use `copy .env.example .env.local` instead of `cp`.
 
 ### Environment variables (all server-side, no `NEXT_PUBLIC_`)
 
